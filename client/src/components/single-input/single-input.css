@@ -1,0 +1,25 @@
+.single-input-box {
+  padding: 0.3rem;
+}
+
+.inputs-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: space-between;
+  list-style: none;
+  font-size: 1.7rem;
+}
+
+.input-item {
+  margin-left: 0.5rem;
+}
+
+.delete-btn span,
+.edit-btn span {
+  font-size: 1.7rem;
+}
+
+.delete-btn span:hover,
+.edit-btn span:hover {
+  color: blueviolet;
+}

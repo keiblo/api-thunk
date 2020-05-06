@@ -1,0 +1,23 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.save-btn {
+  margin-top: 0.5rem;
+  background-color: #551a8b;
+  color: white;
+  padding: 0.5rem;
+}
+
+.save-btn:hover {
+  background-color: blueviolet;
+}
+
+.cancel-btn {
+  margin-top: 0.5rem;
+  background-color: #551a8b;
+  color: white;
+  padding: 0.5rem;
+}
