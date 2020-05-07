@@ -1,12 +1,7 @@
 import React from "react";
 import DisplayInput from "./components/display-inputs";
 import InputForm from "./components/input-form";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Switch,
-  Route,
-} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route} from "react-router-dom";
 import "./App.css";
 
 import {Provider} from "react-redux";

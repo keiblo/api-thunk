@@ -7,20 +7,18 @@ import PropTypes from "prop-types";
 import {getInputs} from "../../actions/inputActions";
 
 const DisplayInputs = (props) => {
-  const {loading, list, getInputs} = props;
+  const {loading, list, getInputs, error} = props;
 
   useEffect(() => {
     getInputs();
+    //eslint-disable-next-line
   }, []);
-
-  if (loading || list === null) {
-    return <Spinner />;
-  }
 
   return (
     <div className="display-input-box">
-      {!loading && list.length === 0 ? (
-        <p>No inputs to show...</p>
+      {error !== null ? <p className="error">{error.message}</p> : null}
+      {loading || list === null ? (
+        <Spinner />
       ) : (
         list.map((input) => (
           <SingleInput
@@ -40,10 +38,12 @@ DisplayInputs.propTypes = {
   loading: PropTypes.bool.isRequired,
   list: PropTypes.array,
   getInputs: PropTypes.func.isRequired,
+  error: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   loading: state.inputs.loading,
   list: state.inputs.list,
+  error: state.inputs.error,
 });
 export default connect(mapStateToProps, {getInputs})(DisplayInputs);

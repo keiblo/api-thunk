@@ -21,3 +21,9 @@
   color: white;
   padding: 0.5rem;
 }
+
+.error {
+  border: 1px solid red;
+  color: red;
+  padding: 1rem;
+}

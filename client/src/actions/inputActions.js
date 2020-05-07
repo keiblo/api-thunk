@@ -1,5 +1,4 @@
 import {
-  ADD_INPUT,
   SET_LOADING,
   GET_INPUTS,
   DELETE_INPUT,
@@ -16,9 +15,8 @@ export const getInputs = () => async (dispatch) => {
     setLoading();
 
     const res = await fetch(`${http}`);
-
     const data = await res.json();
-    console.log(data);
+
     dispatch({
       type: GET_INPUTS,
       payload: data,
@@ -31,38 +29,42 @@ export const getInputs = () => async (dispatch) => {
   }
 };
 
-// ADD NEW INPUT
-export const addInput = (name, price, content) => async (dispatch) => {
-  try {
-    setLoading();
-
-    const res = await fetch(`${http}`, {
-      method: "POST",
-      body: JSON.stringify({name, price, content}),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
-
-    dispatch({
-      type: ADD_INPUT,
-      payload: data,
-    });
-  } catch (err) {
-    dispatch({
-      type: INPUTS_ERROR,
-      payload: err,
-    });
-  }
-};
+{
+  /*
+  // ADD NEW INPUT
+  export const addInput = (name, price, content) => async (dispatch) => {
+    try {
+      setLoading();
+  
+      const res = await fetch(`${http}`, {
+        method: "POST",
+        body: JSON.stringify({name, price, content}),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+  
+      dispatch({
+        type: ADD_INPUT,
+        payload: data,
+      });
+    } catch (err) {
+      dispatch({
+        type: INPUTS_ERROR,
+        payload: err,
+      });
+    }
+  };
+*/
+}
 
 //DELETE INPUT
 export const deleteInput = (id) => async (dispatch) => {
   try {
     setLoading();
 
-    await fetch(`http://localhost:7070/api/serviced/:${id}`, {
+    await fetch(`${http}:${id}`, {
       method: "DELETE",
     });
 
@@ -91,6 +93,7 @@ export const setCurrent = (id) => async (dispatch) => {
       payload: data,
     });
   } catch (err) {
+    console.dir(err);
     dispatch({
       type: INPUTS_ERROR,
       payload: err,
@@ -100,22 +103,23 @@ export const setCurrent = (id) => async (dispatch) => {
 
 // EDIT INPUT
 export const editInput = (id, name, price, content) => async (dispatch) => {
-  const editeInput = {id, name, price, content};
+  const editedInput = {id, name, price, content};
   try {
     setLoading();
 
     const res = await fetch(`${http}`, {
       method: "POST",
-      body: JSON.stringify(editeInput),
+      body: JSON.stringify(editedInput),
       headers: {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
       },
     });
+    const data = await res.json();
 
     dispatch({
       type: EDIT_INPUT,
-      payload: editeInput,
+      payload: data,
     });
   } catch (err) {
     dispatch({

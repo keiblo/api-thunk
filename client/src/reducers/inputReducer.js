@@ -1,6 +1,5 @@
 import {
   GET_INPUTS,
-  ADD_INPUT,
   SET_LOADING,
   DELETE_INPUT,
   SET_CURRENT,
@@ -23,12 +22,14 @@ export default (state = intialState, action) => {
         ...state,
         list: action.payload,
         loading: false,
+        error: null,
       };
 
     case SET_LOADING:
       return {...state, loading: true};
 
-    case ADD_INPUT:
+      {
+        /*case ADD_INPUT:
       return {
         ...state,
         list: [
@@ -40,42 +41,44 @@ export default (state = intialState, action) => {
           },
         ],
         loading: false,
+        error: null,
       };
+    */
+      }
 
     case DELETE_INPUT:
       return {
         ...state,
         list: [...state.list.filter((input) => input.id !== action.payload)],
         loading: false,
+        error: null,
       };
 
     case EDIT_INPUT:
       return {
-        ...state,
         list: [
           ...state.list.filter((input) => input.id !== action.payload.id),
           {
             id: action.payload.id,
             name: action.payload.name,
-            contenе: action.payload.content,
+            content: action.payload.content,
             price: action.payload.price,
           },
         ],
-        editMode: false,
+
         editItem: {},
         loading: false,
+        error: null,
       };
 
     case SET_CURRENT:
       return {
         ...state,
-        editMode: true,
         editItem: action.payload,
         loading: false,
       };
 
     case INPUTS_ERROR:
-      console.error(`popa ${action.payload}`);
       return {
         ...state,
         error: action.payload,
