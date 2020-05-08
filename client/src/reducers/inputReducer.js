@@ -29,6 +29,7 @@ export default (state = intialState, action) => {
     case SET_LOADING:
       return {...state, loading: true};
 
+    case ADD_INPUT:
       return {
         ...state,
         list: [
@@ -62,7 +63,7 @@ export default (state = intialState, action) => {
             price: action.payload.price,
           },
         ],
-
+        editMode: false,
         editItem: {},
         loading: false,
         error: null,
@@ -73,6 +74,7 @@ export default (state = intialState, action) => {
         ...state,
         editItem: action.payload,
         loading: false,
+        editMode: true,
       };
 
     case INPUTS_ERROR:

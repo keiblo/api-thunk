@@ -3,6 +3,7 @@ import "./display-inputs.css";
 import {connect} from "react-redux";
 import SingleInput from "../single-input";
 import Spinner from "../spinner";
+import InputForm from "../input-form";
 import PropTypes from "prop-types";
 import {getInputs} from "../../actions/inputActions";
 
