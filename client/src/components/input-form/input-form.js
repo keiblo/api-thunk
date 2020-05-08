@@ -33,55 +33,45 @@ const InputForm = ({editItem, editInput, error, loading}) => {
     clearInputFields();
     history.push("/services");
   };
-  function isEmpty(obj) {
-    for (var key in obj) {
-      if (obj.hasOwnProperty(key)) return false;
-    }
-    return true;
+  if (error !== null) {
+    return <p className="error">{error.message}</p>;
+  } else if (loading) {
+    return <Spinner />;
   }
-  console.log(loading);
-  console.log(editItem);
-  return (
-    <div>
-      {error !== null ? <p className="error">{error.message}</p> : null}
 
-      {loading || isEmpty(editItem) ? (
-        <Spinner />
-      ) : (
-        <form onSubmit={handleSubmit} className="form">
-          <label>Вид ремонта</label>
-          <input
-            className="name-input"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            autoFocus
-          />
-          <label>Цена</label>
-          <input
-            className="price-input"
-            type="number"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-          <label>Описание</label>
-          <input
-            className="content-input"
-            type="text"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
-          <button type="submit" className="save-btn">
-            Save
-          </button>
-          {editItem ? (
-            <Link to="/services" className="cancel-btn">
-              Cancel
-            </Link>
-          ) : null}
-        </form>
-      )}
-    </div>
+  return (
+    <form onSubmit={handleSubmit} className="form">
+      <label>Вид ремонта</label>
+      <input
+        className="name-input"
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        autoFocus
+      />
+      <label>Цена</label>
+      <input
+        className="price-input"
+        type="number"
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
+      />
+      <label>Описание</label>
+      <input
+        className="content-input"
+        type="text"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+      />
+      <button type="submit" className="save-btn">
+        Save
+      </button>
+      {editItem ? (
+        <Link to="/services" className="cancel-btn">
+          Cancel
+        </Link>
+      ) : null}
+    </form>
   );
 };
 

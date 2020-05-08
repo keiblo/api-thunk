@@ -1,4 +1,5 @@
 import {
+  ADD_INPUT,
   GET_INPUTS,
   SET_LOADING,
   DELETE_INPUT,
@@ -28,8 +29,6 @@ export default (state = intialState, action) => {
     case SET_LOADING:
       return {...state, loading: true};
 
-      {
-        /*case ADD_INPUT:
       return {
         ...state,
         list: [
@@ -43,8 +42,6 @@ export default (state = intialState, action) => {
         loading: false,
         error: null,
       };
-    */
-      }
 
     case DELETE_INPUT:
       return {

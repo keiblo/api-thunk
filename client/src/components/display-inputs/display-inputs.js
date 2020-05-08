@@ -14,11 +14,16 @@ const DisplayInputs = (props) => {
     //eslint-disable-next-line
   }, []);
 
+  if (error !== null) {
+    return <p className="error">{error.message}</p>;
+  } else if (loading || list === null) {
+    return <Spinner />;
+  }
+
   return (
     <div className="display-input-box">
-      {error !== null ? <p className="error">{error.message}</p> : null}
-      {loading || list === null ? (
-        <Spinner />
+      {list.length === 0 ? (
+        <p>No inputs to show</p>
       ) : (
         list.map((input) => (
           <SingleInput
