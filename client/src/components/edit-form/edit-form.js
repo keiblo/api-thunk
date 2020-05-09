@@ -1,13 +1,24 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import PropTypes from "prop-types";
+import Spinner from "../spinner";
 import {connect} from "react-redux";
-import {addInput} from "../../actions/inputActions";
-import "./input-from.css";
+import {editInput} from "../../actions/inputActions";
+import {useHistory} from "react-router-dom";
+import "./edit-form.css";
 
-const InputForm = ({error, addInput}) => {
+const EditForm = ({editItem, editInput, editMode, error, loading}) => {
+  let history = useHistory();
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [content, setContent] = useState("");
+
+  useEffect(() => {
+    setPrice(editItem.price);
+    setName(editItem.name);
+    setContent(editItem.content);
+
+    // eslint-disable-next-line
+  }, [editMode]);
 
   const clearInputFields = () => {
     setPrice("");
@@ -18,14 +29,24 @@ const InputForm = ({error, addInput}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    addInput(name, price, content);
     clearInputFields();
+    editInput(editItem.id, name, price, content);
+
+    history.push("/services");
+  };
+
+  const handleCancel = () => {
+    clearInputFields();
+    history.push("/services");
   };
 
   if (error !== null) {
     return <p className="error">{error.message}</p>;
   }
 
+  if (loading & !editMode) {
+    return <Spinner />;
+  }
   return (
     <form onSubmit={handleSubmit} className="form">
       <label>Вид ремонта</label>
@@ -53,11 +74,20 @@ const InputForm = ({error, addInput}) => {
       <button type="submit" className="save-btn">
         Save
       </button>
+
+      <button
+        onClick={() => {
+          handleCancel();
+        }}
+        className="cancel-btn"
+      >
+        Cancel
+      </button>
     </form>
   );
 };
 
-InputForm.propTypes = {
+EditForm.propTypes = {
   editItem: PropTypes.object.isRequired,
   editInput: PropTypes.func.isRequired,
   error: PropTypes.string,
@@ -72,4 +102,4 @@ const mapStateToProps = (state) => ({
   editMode: state.inputs.editMode,
 });
 
-export default connect(mapStateToProps, {addInput})(InputForm);
+export default connect(mapStateToProps, {editInput})(EditForm);

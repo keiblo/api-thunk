@@ -5,13 +5,6 @@ import PropTypes from "prop-types";
 
 import {connect} from "react-redux";
 
-function isEmpty(obj) {
-  for (var key in obj) {
-    if (obj.hasOwnProperty(key)) return false;
-  }
-  return true;
-}
-
 const Services = ({editMode, editItem}) => {
   return (
     <div>

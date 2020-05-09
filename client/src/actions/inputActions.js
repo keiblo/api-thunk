@@ -29,9 +29,12 @@ export const getInputs = () => async (dispatch) => {
   }
 };
 
+//ADD INPUT
 export const addInput = (name, price, content) => async (dispatch) => {
   dispatch(setLoading());
+  console.log("fired");
   try {
+    console.log("fired");
     const res = await fetch(`${http}`, {
       method: "POST",
       body: JSON.stringify({name, price, content}),
@@ -76,6 +79,7 @@ export const deleteInput = (id) => async (dispatch) => {
 //SET CURRENT
 export const setCurrent = (id) => async (dispatch) => {
   dispatch(setLoading());
+
   try {
     const res = await fetch(`${http}${id}`);
     const data = await res.json();
@@ -96,6 +100,7 @@ export const setCurrent = (id) => async (dispatch) => {
 // EDIT INPUT
 export const editInput = (id, name, price, content) => async (dispatch) => {
   dispatch(setLoading());
+
   try {
     const res = await fetch(`${http}`, {
       method: "POST",

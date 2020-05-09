@@ -1,6 +1,6 @@
 import React from "react";
 import Services from "./components/services";
-import InputForm from "./components/input-form";
+import EditForm from "./components/edit-form";
 
 import {BrowserRouter as Router, Redirect, Route} from "react-router-dom";
 import "./App.css";
@@ -15,7 +15,7 @@ function App({editMode}) {
         <div className="App">
           <Redirect from="/" to="/services" />
           <Route exact path="/services" component={Services} />
-          <Route exact path="/services/:id" component={InputForm} />
+          <Route exact path="/services/:id" component={EditForm} />
         </div>
       </Router>
     </Provider>
